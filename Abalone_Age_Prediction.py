@@ -42,7 +42,7 @@ data.hist(figsize=(20, 10), grid=False, layout=(2, 4), bins=30)
 # %% Checking missing values and see distribution of each variable
 
 # Check if dataset has missing values
-missing_values = data.isnull().sum().sort_values(ascending = False)
+missing_values = data.isnull().sum().sort_values(ascending=False)
 percentage_missing_values = (missing_values/len(data))*100
 Check_missing_values = pd.concat([missing_values, percentage_missing_values], axis=1, keys= ['Missing values', '% Missing'])
 
@@ -56,8 +56,8 @@ data.describe()
 sns.countplot(x = 'Sex', data = data, palette="Set3")
 
 plt.figure(figsize = (20,7))
-sns.swarmplot(x = 'Sex', y = 'age', data = data, hue = 'Sex')
-sns.violinplot(x = 'Sex', y = 'age', data = data)
+sns.swarmplot(x='Sex', y='age', data=data, hue='Sex')
+sns.violinplot(x='Sex', y='age', data=data)
 
 # Male : age majority lies in between 7.5 years to 19 years
 # Female: age majority lies in between 8 years to 19 years
@@ -72,8 +72,8 @@ sns.violinplot(x = 'Sex', y = 'age', data = data)
 # df = df.drop(["Sex"], axis = 1)
 
 # %% pairplot
-print(data.groupby('Sex')[['Length', 'Diameter', 'Height', 'Whole weight', 'Shucked weight',
-       'Viscera weight', 'Shell weight', 'age']].mean().sort_values('age'))
+print(data.groupby('Sex')[['Length', 'Diameter', 'Height', 'Whole weight', 'Shucked weight', 'Viscera weight',
+                           'Shell weight', 'age']].mean().sort_values('age'))
 
 numerical_features = data.select_dtypes(include=[np.number]).columns
 categorical_features = data.select_dtypes(include=[np.object]).columns
@@ -83,7 +83,7 @@ sns.pairplot(data[numerical_features])
 # %% Heatmap
 plt.figure(figsize=(16, 6))
 heatmap = sns.heatmap(data.corr(),vmin=-1, vmax=1, annot=True, cmap='BrBG')
-heatmap.set_title('Correlation Heatmap', fontdict={'fontsize':18}, pad=12)
+heatmap.set_title('Correlation Heatmap', fontdict={'fontsize': 18}, pad=12)
 
 # Whole Weight is almost linearly varying with all other features except age
 # Height has the least linearity with remaining features
@@ -93,41 +93,41 @@ heatmap.set_title('Correlation Heatmap', fontdict={'fontsize':18}, pad=12)
 # %% Outliers handlings
 # 'Viscera weight' outliers removal
 var1 = 'Viscera weight'
-plt.scatter(x = data[var1], y = data['age'],)
+plt.scatter(x=data[var1], y=data['age'],)
 plt.grid(True)
 
-data.drop(data[(data['Viscera weight']> 0.5) & (data['age'] < 20)].index, inplace=True)
-data.drop(data[(data['Viscera weight']<0.5) & (data['age'] > 25)].index, inplace=True)
+data.drop(data[(data['Viscera weight'] > 0.5) & (data['age'] < 20)].index, inplace=True)
+data.drop(data[(data['Viscera weight'] < 0.5) & (data['age'] > 25)].index, inplace=True)
 
 # %% 'Shell weight' outliers removal
 var2 = 'Shell weight'
 plt.scatter(x = data[var2], y = data['age'],)
 plt.grid(True)
-data.drop(data[(data['Shell weight']> 0.6) & (data['age'] < 25)].index, inplace=True)
-data.drop(data[(data['Shell weight']< 0.8) & (data['age'] > 25)].index, inplace=True)
+data.drop(data[(data['Shell weight'] > 0.6) & (data['age'] < 25)].index, inplace=True)
+data.drop(data[(data['Shell weight'] < 0.8) & (data['age'] > 25)].index, inplace=True)
 
 # %% 'Viscera weight' outliers removal
 var3 = 'Shucked weight'
 plt.scatter(x = data[var3], y = data["age"],)
 plt.grid(True)
-data.drop(data[(data['Shucked weight']>= 1) & (data['age'] < 20)].index, inplace=True)
-data.drop(data[(data['Shucked weight']<1) & (data['age'] > 20)].index, inplace=True)
+data.drop(data[(data['Shucked weight'] >= 1) & (data['age'] < 20)].index, inplace=True)
+data.drop(data[(data['Shucked weight'] < 1) & (data['age'] > 20)].index, inplace=True)
 
 # %% 'Whole weight' outliers removal
 var4 = 'Whole weight'
-plt.scatter(x = data[var4], y = data['age'],)
+plt.scatter(x=data[var4], y=data['age'],)
 plt.grid(True)
-data.drop(data[(data['Whole weight']>= 2.5) & (data['age'] < 25)].index, inplace=True)
-data.drop(data[(data['Whole weight']<2.5) & (data['age'] > 25)].index, inplace=True)
+data.drop(data[(data['Whole weight'] >= 2.5) & (data['age'] < 25)].index, inplace=True)
+data.drop(data[(data['Whole weight'] < 2.5) & (data['age'] > 25)].index, inplace=True)
 
 
 # %% "Diameter" outliers removal
 var5 = "Diameter"
-plt.scatter(x = data[var5], y = data["age"],)
+plt.scatter(x=data[var5], y=data["age"],)
 plt.grid(True)
-data.drop(data[(data['Diameter']<0.1) & (data['age'] < 5)].index, inplace=True)
-data.drop(data[(data['Diameter']<0.6) & (data['age'] > 25)].index, inplace=True)
-data.drop(data[(data['Diameter']>=0.6) & (data['age']< 25)].index, inplace=True)
+data.drop(data[(data['Diameter'] < 0.1) & (data['age'] < 5)].index, inplace=True)
+data.drop(data[(data['Diameter'] < 0.6) & (data['age'] > 25)].index, inplace=True)
+data.drop(data[(data['Diameter'] >= 0.6) & (data['age'] < 25)].index, inplace=True)
 
 # %% 'Height' outliers removal
 var = 'Height'
@@ -346,8 +346,8 @@ x = ['Logistic Regression','SVC', 'KNN', 'Decision Tree','Random Forest','AdaBoo
 y1 = [lr_train_acc, svc_train_acc, knn_train_acc, dt_train_acc, rf_train_acc, adb_train_acc, gdb_train_acc, xgb_train_acc]
 y2 = [lr_test_acc, svc_test_acc, knn_test_acc, dt_test_acc, rf_test_acc, adb_test_acc, gdb_test_acc, xgb_test_acc]
 
-trace1 = go.Bar(x = x, y = y1, name = 'Training Accuracy', marker = dict(color = 'cyan'))
-trace2 = go.Bar(x = x, y = y2, name = 'Testing Accuracy', marker = dict(color = 'violet'))
+trace1 = go.Bar(x = x, y = y1, name='Training Accuracy', marker = dict(color='cyan'))
+trace2 = go.Bar(x = x, y = y2, name='Testing Accuracy', marker = dict(color='violet'))
 data = [trace1,trace2]
 layout = go.Layout(title = 'Accuracy Plot', width = 750)
 fig = go.Figure(data = data, layout = layout)
